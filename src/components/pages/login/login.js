@@ -1,13 +1,14 @@
 import React from "react";
 import "./login.css";
 import { Link } from "react-router-dom";
+import { Logo } from "../../../assets/icons";
 
 export default function LoginScreen() {
   return (
     <section id="login">
       <main className="container">
         <header>
-          <img src="https://img.icons8.com/cotton/64/000000/test-tube.png" />
+          <Logo />
           <h3>Checkin</h3>
         </header>
         <form id="login-form" className="default-form">
