@@ -1,7 +1,11 @@
 import React from "react";
 
 export const FormDefaultWrapper = ({ onSubmit, children }) => {
-  return <form onSubmit={onSubmit} className="default-form">{children}</form>;
+  return (
+    <form onSubmit={onSubmit} className="default-form">
+      {children}
+    </form>
+  );
 };
 
 export const InputDefault = ({
@@ -11,11 +15,13 @@ export const InputDefault = ({
   onChange,
   disabled,
   required,
-  title
+  title,
+  value
 }) => (
   <div className="default-input">
     <label>{title}</label>
     <input
+      value={value}
       placeholder={placeholder}
       type={type}
       onChange={onChange}
@@ -26,10 +32,18 @@ export const InputDefault = ({
   </div>
 );
 
-export const ButtonDefault = ({ onClick, title }) => {
+export const ButtonDefault = ({
+  isLoading,
+  disabled,
+  onClick,
+  title,
+  type
+}) => {
   return (
     <div className="default-button">
-      <button onClick={onClick}>{title}</button>
+      <button type={type} onClick={onClick} disabled={disabled}>
+        {isLoading ? "..." : title}
+      </button>
     </div>
   );
 };
