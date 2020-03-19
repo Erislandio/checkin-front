@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2471b79d5889f569fc282f878dcee06e",
+    "revision": "80b3d30a431fbf5883871b1c8221569d",
     "url": "/checkin-front/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/checkin-front/static/css/2.627926fe.chunk.css"
   },
   {
-    "revision": "f94d30ff30cdf600792c",
+    "revision": "48c3526963c61fd23a13",
     "url": "/checkin-front/static/css/main.3bd9c5ea.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/checkin-front/static/js/2.93bfb5ec.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "f94d30ff30cdf600792c",
-    "url": "/checkin-front/static/js/main.cbbd9de8.chunk.js"
+    "revision": "48c3526963c61fd23a13",
+    "url": "/checkin-front/static/js/main.2a9fdec7.chunk.js"
   },
   {
     "revision": "914e5297430b624a4e9f",
