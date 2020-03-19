@@ -100,7 +100,7 @@ export default function LoginScreen({ history }) {
             name="password"
           />
           <ButtonDefault
-            title="Criar"
+            title="Entrar"
             type="submit"
             isLoading={isLoading}
             disabled={isLoading}

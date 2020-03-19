@@ -11,7 +11,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         user ? (
           <Component {...rest} {...props} />
         ) : (
-          <Redirect to="/login" exact />
+          <Redirect to="/" exact />
         )
       }
     />
@@ -28,7 +28,7 @@ const LoginRoute = ({ component: Component, path, ...rest }) => {
         user && path === "/" ? (
           <Redirect to="/home" exact {...props} />
         ) : (
-          <Component to="/login" exact {...props} />
+          <Component to="/" exact {...props} />
         )
       }
     />
