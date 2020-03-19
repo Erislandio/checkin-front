@@ -27,7 +27,7 @@ export const withUserData = Component => props => {
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      <Component {...props} user={user} />
+      <Component {...props} user={user} setUser={setUser} />
     </UserContext.Provider>
   );
 };

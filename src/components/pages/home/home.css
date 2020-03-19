@@ -1,0 +1,66 @@
+.app,
+.leaflet-container {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+.bottom-navigator {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  padding: 10px;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.8);
+  width: 100%;
+
+  -webkit-box-shadow: 1px -1px 18px -4px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px -1px 18px -4px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px -1px 18px -4px rgba(0, 0, 0, 0.75);
+}
+
+.bottom-navigator ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.bottom-navigator ul li {
+  list-style: none;
+}
+
+.loading-data {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.loading-data img {
+  margin-bottom: 30px;
+  display: block;
+}
+
+.react-confirm-alert-overlay {
+  z-index: 1000000;
+}
+
+.react-confirm-alert {
+  border: 1px solid #dedede;
+}
+
+.react-confirm-alert-button-group button {
+  font-size: 20px !important;
+  font-weight: bold;
+  width: 100%;
+  padding: 15px !important;
+}
+
+.react-confirm-alert-button-group > button:first-child {
+  background-color: #e74c3c;
+}
+
+.react-confirm-alert-button-group > button:last-of-type {
+  background-color: #27ae60;
+}

@@ -61,7 +61,7 @@ export default function SignInScreen({ history }) {
               });
             }
             localStorage.setItem("user", JSON.stringify(data));
-            history.push("/home");
+            history.push("/pre-home");
           })
           .catch(error => {
             addToast(
