@@ -11,17 +11,34 @@ import {
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { confirmAlert } from "react-confirm-alert";
 import { UserContext } from "../../Index";
+import axios from "axios";
+import InputMask from "react-input-mask";
+import { api } from "../../services/api";
+import { useToasts } from "react-toast-notifications";
+import LoadingOverlay from "react-loading-overlay";
 
 function Account({ history }) {
+  const { addToast } = useToasts();
   const {
     user: {
+      token,
+      setUser,
       user,
       user: { address: userAddress, symptom }
     }
   } = useContext(UserContext);
 
   const [checked, setChecked] = useState(symptom);
-  const [address, setAddress] = useState(userAddress);
+  const [address, setAddress] = useState({
+    postalCode: userAddress?.postalCode || "",
+    complemento: userAddress?.complemento || "",
+    bairro: userAddress?.bairro || "",
+    uf: userAddress?.uf || "",
+    logradouro: userAddress?.logradouro || "",
+    localidade: userAddress?.localidade || "",
+    number: userAddress?.localidade || ""
+  });
+  const [isLoading, setLoading] = useState(false);
 
   const options = {
     title: "Alerta",
@@ -46,6 +63,38 @@ function Account({ history }) {
 
   const handleSubmitForm = e => {
     e.preventDefault();
+    setLoading(true);
+
+    api
+      .patch(
+        "/address",
+        {
+          ...address,
+          email: user.email,
+          number: parseInt(address.number)
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
+      .then(({ data }) => {
+        if (data) {
+          setUser(data);
+          addToast("Endereço atualizado com sucesso!", {
+            appearance: "info"
+          });
+        }
+      })
+      .catch(() => {
+        addToast("ENão foi possível atualizar o seu endereço no momento", {
+          appearance: "error"
+        });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const handleChange = e => {
@@ -57,12 +106,40 @@ function Account({ history }) {
       ...address,
       [name]: value
     });
+
+    if (name === "postalCode") {
+      let cep = value.replace(/\_|-/g, "");
+      console.log(cep.length);
+
+      axios
+        .get(`https://viacep.com.br/ws/${value.replace(/\.|\-/, "")}/json/`)
+        .then(({ data }) => {
+          if (data.erro && cep.length === 8) {
+            addToast(
+              `Nenhum endereço foi encontrado para o CEP: ${address.postalCode}`,
+              {
+                appearance: "warning"
+              }
+            );
+            return setAddress({
+              ...address
+            });
+          }
+
+          setAddress({
+            ...data,
+            postalCode: data.cep
+          });
+        });
+    }
   };
 
   const handleExit = () => {
     localStorage.removeItem("user");
     history.go("/");
   };
+
+  console.log(address);
 
   return (
     <section id="account">
@@ -98,16 +175,16 @@ function Account({ history }) {
             <h3>Endereço cadastrado</h3>
           </label>
           <FormDefaultWrapper onSubmit={handleSubmitForm}>
-            <InputDefault
-              type="cel"
-              required
-              onChange={() => {}}
-              placeholder="Cep"
-              value={userAddress.postalCode}
-              name="postalCode"
-              title="CEP"
-              onChange={handleChange}
-            />
+            <div className="default-input">
+              <label>CEP</label>
+              <InputMask
+                mask="99999-999"
+                onChange={handleChange}
+                name="postalCode"
+                value={address.postalCode}
+                placeholder="xx.xxx-xxx"
+              />
+            </div>
             <InputDefault
               type="text"
               required
@@ -116,20 +193,10 @@ function Account({ history }) {
               name="logradouro"
               disabled
               title="Rua"
-              value={userAddress.logradouro}
+              value={address.logradouro}
               onChange={handleChange}
             />
-            <InputDefault
-              type="text"
-              required
-              onChange={() => {}}
-              placeholder="Complemento"
-              name="complemento"
-              title="Complemento"
-              disabled
-              value={userAddress.complemento}
-              onChange={handleChange}
-            />
+
             <InputDefault
               type="text"
               required
@@ -138,7 +205,7 @@ function Account({ history }) {
               name="bairro"
               disabled
               title="Bairro"
-              value={userAddress.bairro}
+              value={address.bairro}
               onChange={handleChange}
             />
             <InputDefault
@@ -149,7 +216,7 @@ function Account({ history }) {
               name="localidade"
               disabled
               title="Localidade"
-              value={userAddress.localidade}
+              value={address.localidade}
               onChange={handleChange}
             />
             <InputDefault
@@ -160,7 +227,17 @@ function Account({ history }) {
               name="uf"
               disabled
               title="UF"
-              value={userAddress.uf}
+              value={address.uf}
+              onChange={handleChange}
+            />
+            <InputDefault
+              type="text"
+              required
+              onChange={handleChange}
+              placeholder="Complemento"
+              name="complemento"
+              title="Complemento"
+              value={address.complemento}
               onChange={handleChange}
             />
             <InputDefault
@@ -170,16 +247,23 @@ function Account({ history }) {
               placeholder="Número"
               name="number"
               title="Número"
-              value={userAddress.number}
+              value={address.number}
               onChange={handleChange}
             />
             <ButtonDefault
               type="submit"
+              isLoading={isLoading}
               title={user.address ? "Atualizar" : "Cadastrar"}
             />
           </FormDefaultWrapper>
         </div>
       </main>
+      <LoadingOverlay
+        active={isLoading}
+        spinner
+        className="loading-modal"
+        text="Atualizando aguarde..."
+      ></LoadingOverlay>
     </section>
   );
 }

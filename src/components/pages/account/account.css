@@ -39,3 +39,8 @@ label.label-symptom {
   margin-bottom: 20px;
   background-color: #e74c3c;
 }
+.loading-modal > div {
+  position: fixed;
+  z-index: 10000;
+  overflow: hidden;
+}
