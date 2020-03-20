@@ -81,7 +81,7 @@ function Home() {
     getLocation();
   }, []);
 
-  if (loadingData) {
+  if (loadingData || !user) {
     return (
       <div className="loading-data">
         <Logo />
@@ -90,8 +90,6 @@ function Home() {
       </div>
     );
   }
-
-  console.log(user)
 
   return (
     <section className="app" id="app">

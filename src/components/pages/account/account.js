@@ -16,15 +16,17 @@ import InputMask from "react-input-mask";
 import { api } from "../../services/api";
 import { useToasts } from "react-toast-notifications";
 import LoadingOverlay from "react-loading-overlay";
+import { IoIosArrowBack } from "react-icons/io";
 
 function Account({ history }) {
   const { addToast } = useToasts();
+
   const {
+    setUser,
+    user,
     user: {
       token,
-      setUser,
-      user,
-      user: { address: userAddress, symptom }
+      user: { name, lastname, email, address: userAddress, symptom }
     }
   } = useContext(UserContext);
 
@@ -70,7 +72,7 @@ function Account({ history }) {
         "/address",
         {
           ...address,
-          email: user.email,
+          email: email,
           number: parseInt(address.number)
         },
         {
@@ -81,16 +83,17 @@ function Account({ history }) {
       )
       .then(({ data }) => {
         if (data) {
-          setUser(data);
+          setUser({
+            user: {
+              ...data
+            },
+            token
+          });
+
           addToast("Endereço atualizado com sucesso!", {
             appearance: "info"
           });
         }
-      })
-      .catch(() => {
-        addToast("ENão foi possível atualizar o seu endereço no momento", {
-          appearance: "error"
-        });
       })
       .finally(() => {
         setLoading(false);
@@ -109,7 +112,6 @@ function Account({ history }) {
 
     if (name === "postalCode") {
       let cep = value.replace(/\_|-/g, "");
-      console.log(cep.length);
 
       axios
         .get(`https://viacep.com.br/ws/${value.replace(/\.|\-/, "")}/json/`)
@@ -136,19 +138,20 @@ function Account({ history }) {
 
   const handleExit = () => {
     localStorage.removeItem("user");
-    history.go("/");
+    window.location.href = "/";
   };
-
-  console.log(address);
 
   return (
     <section id="account">
+      <IoIosArrowBack
+        onClick={() => history.push("/home")}
+        size={40}
+        color="#c599c6"
+      />
+
       <main className="account-page">
-        <header>
-          <Logo />
-          <h2>
-            Olá {`${user.name} ${user.lastname}, esperamos que esteja bem.`}
-          </h2>
+        <header style={{ textAlign: "center" }}>
+          <h2>Olá {`${name} ${lastname}, esperamos que esteja bem.`}</h2>
         </header>
         <div className="btn-exit">
           <ButtonDefault

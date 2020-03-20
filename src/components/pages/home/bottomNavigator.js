@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { IoIosSettings, IoIosSearch, IoIosHome } from "react-icons/io";
+import { IoIosSettings, IoIosSearch, IoIosHome, IoMdMap } from "react-icons/io";
 
 export function BottomNavigation({ search, latitude, longitude }) {
   return (
@@ -13,7 +13,7 @@ export function BottomNavigation({ search, latitude, longitude }) {
         </li>
         <li>
           <Link to="/home">
-            <IoIosHome size={30} color="#c599c6" />
+            <IoMdMap size={30} color="#c599c6" />
           </Link>
         </li>
         <li>
