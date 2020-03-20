@@ -62,7 +62,20 @@ export default function SignInScreen({ history }) {
               });
             }
             localStorage.setItem("user", JSON.stringify(data));
-            history.go("/pre-home");
+
+            const check = new Promise((res, rej) => {
+              if (localStorage.getItem("user")) {
+                res();
+              }
+            });
+
+            check
+              .then(() => {
+                window.location.href = "/pre-home";
+              })
+              .catch(() => {
+                window.location.href = "/home";
+              });
           })
           .catch(error => {
             addToast(
