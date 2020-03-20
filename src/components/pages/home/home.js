@@ -114,8 +114,7 @@ function Home() {
               return (
                 <Marker position={user.location.coordinates.reverse()} key={user._id}>
                   <Popup>
-                    {`${user.name} ${user.lastname} `}
-                    está com os sintomas do covid-19
+                    Temos 1 pessoa com o sintomas de covid-19 aqui.
                   </Popup>
                 </Marker>
               );
