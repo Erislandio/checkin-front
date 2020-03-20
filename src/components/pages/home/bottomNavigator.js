@@ -7,9 +7,9 @@ export function BottomNavigation({ search, latitude, longitude }) {
     <div className="bottom-navigator">
       <ul>
         <li>
-          <Link onClick={() => search(latitude, longitude)}>
+          <span onClick={() => search(latitude, longitude)}>
             <IoIosSearch size={30} color="#c599c6" />
-          </Link>
+          </span>
         </li>
         <li>
           <Link to="/home">
