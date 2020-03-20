@@ -4,6 +4,8 @@ import { Redirect, Route } from "react-router-dom";
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const user = localStorage.getItem("user");
 
+  console.log(user)
+
   return (
     <Route
       {...rest}
@@ -11,7 +13,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         user ? (
           <Component {...rest} {...props} />
         ) : (
-          <Redirect to="/" exact />
+          <Redirect to="/home" exact />
         )
       }
     />
@@ -26,7 +28,7 @@ const LoginRoute = ({ component: Component, path, ...rest }) => {
       {...rest}
       render={props =>
         user && path === "/" ? (
-          <Redirect to="/home" exact {...props} />
+          <Redirect to="/pre-home" exact {...props} />
         ) : (
           <Component to="/" exact {...props} />
         )

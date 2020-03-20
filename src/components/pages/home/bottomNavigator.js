@@ -17,7 +17,7 @@ export function BottomNavigation({ search, latitude, longitude }) {
           </Link>
         </li>
         <li>
-          <Link to="search">
+          <Link to="/account">
             <IoIosSettings size={30} color="#c599c6" />
           </Link>
         </li>

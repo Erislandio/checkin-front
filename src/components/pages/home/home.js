@@ -1,27 +1,32 @@
-import React, { useState, useEffect } from "react";
-import { withUserData } from "../../atoms/withUserData";
+import React, { useState, useEffect, useContext } from "react";
 import { Map, TileLayer, Popup, Marker } from "react-leaflet";
 import "./home.css";
 import { BottomNavigation } from "./bottomNavigator";
 import { api } from "../../services/api";
 import { useToasts } from "react-toast-notifications";
 import { Logo } from "../../../assets/icons";
+import { UserContext } from "../../Index";
 
-function Home({ user }) {
+function Home() {
+  const { user } = useContext(UserContext);
+
   const [location, setLocation] = useState({
     viewport: {
       center: [0, 0],
       zoom: 15
     }
   });
+
+
   const [userLocation, setUserLocation] = useState([0, 0]);
   const [loadingData, setLoadingData] = useState(false);
   const [users, setUsers] = useState([]);
   const { addToast } = useToasts();
 
   const findUsersWithSymptom = (latitude, longitude) => {
-    const { token } = user;
     setLoadingData(true);
+
+    const { token } = user;
 
     api
       .post(
@@ -101,7 +106,7 @@ function Home({ user }) {
           />
           <Marker position={userLocation}>
             <Popup>
-              {`Olá ${user.user.name} ${user.user.lastname}, você esta aqui `}
+              {`Olá ${user.name} ${user.lastname}, você esta aqui `}
             </Popup>
           </Marker>
           {users.length &&
@@ -126,4 +131,4 @@ function Home({ user }) {
   );
 }
 
-export default withUserData(Home);
+export default Home;

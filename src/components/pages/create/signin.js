@@ -43,7 +43,8 @@ export default function SignInScreen({ history }) {
       });
 
       if (data.error) {
-        return addToast(data.error.message, {
+        setLoading(false);
+        return addToast(data.message, {
           appearance: "error"
         });
       }
@@ -56,7 +57,7 @@ export default function SignInScreen({ history }) {
           })
           .then(({ data }) => {
             if (data.code) {
-              addToast(data.error.message, {
+              addToast(data.message, {
                 appearance: "error"
               });
             }

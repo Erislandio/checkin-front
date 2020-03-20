@@ -41,14 +41,16 @@ export default function LoginScreen({ history }) {
         })
         .then(({ data }) => {
           if (data.code) {
-            addToast(data.error.message, {
+            return addToast(data.error.message, {
               appearance: "error"
             });
           }
           localStorage.setItem("user", JSON.stringify(data));
-          history.push("/pre-home");
+          window.location.href = '/pre-home'
         })
         .catch(error => {
+          console.log(error);
+
           addToast(
             "Ops! não foi possível acessar o app no momento,  tente novamente mais tarde",
             {
@@ -62,6 +64,7 @@ export default function LoginScreen({ history }) {
 
       setLoading(false);
     } catch (error) {
+      console.log(error);
       addToast(
         "Ops! não foi possível acessar o app no momento,  tente novamente mais tarde",
         {

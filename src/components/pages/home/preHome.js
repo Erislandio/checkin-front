@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { api } from "../../services/api";
 import { withUserData } from "../../atoms/withUserData";
 import { confirmAlert } from "react-confirm-alert"; // Import
@@ -6,9 +6,12 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import { useToasts } from "react-toast-notifications";
 import "./home.css";
 import { Logo } from "../../../assets/icons";
+import { UserContext } from "../../Index";
 
-function PreHome({ history, user, setUser }) {
+function PreHome({ history }) {
   const { addToast } = useToasts();
+
+  const { setUser, user } = useContext(UserContext);
 
   const sendSymptom = async () => {
     try {
@@ -16,16 +19,20 @@ function PreHome({ history, user, setUser }) {
       const { data } = await api.patch(
         "/user",
         {
-          email: user.email
+          email: user.user.email
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      if (data.user) {
-        setUser(data);
-        return finish();
+      if (data._id) {
+        setUser({
+          user: {
+            ...data
+          },
+          token: user.token
+        });
+        finish(false);
       }
-      return finish(true);
     } catch (error) {
       return finish(true);
     }

@@ -1,0 +1,41 @@
+section#account {
+  padding: 20px;
+  width: 100%;
+}
+
+section#account header {
+  display: flex;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+section#account header img {
+  margin-right: 20px;
+}
+
+section#account p {
+  margin: 10px 0px;
+}
+
+label.label-symptom {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+}
+
+.address {
+  margin-top: 40px;
+  margin-bottom: 100px;
+}
+
+.address h3 {
+  margin-bottom: 20px;
+}
+.address .default-form {
+  max-width: 100%;
+}
+
+.btn-exit button {
+  margin-bottom: 20px;
+  background-color: #e74c3c;
+}
