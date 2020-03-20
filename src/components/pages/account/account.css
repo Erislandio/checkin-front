@@ -17,6 +17,10 @@ section#account p {
   margin: 10px 0px;
 }
 
+.symptom {
+  padding-bottom: 20px;
+}
+
 label.label-symptom {
   display: flex;
   align-items: end;

@@ -59,6 +59,66 @@ function Account({ history }) {
     closeOnClickOutside: false
   };
 
+  const handleDelete = () => {
+    setLoading(true);
+    api
+      .delete("/user", {
+        data: {
+          email
+        },
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(({ data }) => {
+        if (data.deleted) {
+          addToast("Cadastro removido com sucesso!", {
+            appearance: "success"
+          });
+          localStorage.removeItem("user");
+
+          setTimeout(() => {
+            window.location.href = "/";
+          }, 3000);
+        } else {
+          addToast(
+            "Ops, parece que não foi possível remover seu cadastro no momento, tente novamente!",
+            {
+              appearance: "error"
+            }
+          );
+        }
+      })
+      .catch(() => {
+        addToast(
+          "Ops, parece que não foi possível remover seu cadastro no momento, tente novamente!",
+          {
+            appearance: "error"
+          }
+        );
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const deleteOptions = {
+    title: "Alerta",
+    message: "Tem certeza que deseja apagar seu cadastro no aplicativo?",
+    buttons: [
+      {
+        label: "Sim",
+        onClick: () => handleDelete()
+      },
+      {
+        label: "Não",
+        onClick: () => {}
+      }
+    ],
+    closeOnEscape: false,
+    closeOnClickOutside: false
+  };
+
   const handleCheckOption = () => {
     setChecked(!checked);
   };
@@ -173,6 +233,17 @@ function Account({ history }) {
             <Switch onChange={handleCheckOption} checked={checked} />
           </label>
         </div>
+        <hr />
+        <div className="btn-exit" style={{ marginTop: "30px" }}>
+          <h3>Cadastro</h3>
+
+          <ButtonDefault
+            onClick={() =>
+              confirmAlert({ ...deleteOptions, closeOnClickOutside: true })
+            }
+            title="Deletar cadastro"
+          />
+        </div>
         <div className="address">
           <label>
             <h3>Endereço cadastrado</h3>
@@ -267,6 +338,9 @@ function Account({ history }) {
         className="loading-modal"
         text="Atualizando aguarde..."
       ></LoadingOverlay>
+      <hr />
+      <Logo />
+      <p>Aplicativo desenvolvido por Erislandio soares - Bragança paulista</p>
     </section>
   );
 }
