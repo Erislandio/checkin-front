@@ -103,7 +103,7 @@ function Account({ history }) {
               required
               onChange={() => {}}
               placeholder="Cep"
-              value={address.postalCode}
+              value={userAddress.postalCode}
               name="postalCode"
               title="CEP"
               onChange={handleChange}
@@ -116,7 +116,7 @@ function Account({ history }) {
               name="logradouro"
               disabled
               title="Rua"
-              value={address.logradouro}
+              value={userAddress.logradouro}
               onChange={handleChange}
             />
             <InputDefault
@@ -127,7 +127,7 @@ function Account({ history }) {
               name="complemento"
               title="Complemento"
               disabled
-              value={address.complemento}
+              value={userAddress.complemento}
               onChange={handleChange}
             />
             <InputDefault
@@ -138,7 +138,7 @@ function Account({ history }) {
               name="bairro"
               disabled
               title="Bairro"
-              value={address.bairro}
+              value={userAddress.bairro}
               onChange={handleChange}
             />
             <InputDefault
@@ -149,7 +149,7 @@ function Account({ history }) {
               name="localidade"
               disabled
               title="Localidade"
-              value={address.localidade}
+              value={userAddress.localidade}
               onChange={handleChange}
             />
             <InputDefault
@@ -160,7 +160,7 @@ function Account({ history }) {
               name="uf"
               disabled
               title="UF"
-              value={address.uf}
+              value={userAddress.uf}
               onChange={handleChange}
             />
             <InputDefault
@@ -170,7 +170,7 @@ function Account({ history }) {
               placeholder="Número"
               name="number"
               title="Número"
-              value={address.number}
+              value={userAddress.number}
               onChange={handleChange}
             />
             <ButtonDefault
