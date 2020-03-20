@@ -1,5 +1,5 @@
 import React, { createContext } from "react";
-import { Switch, HashRouter } from "react-router-dom";
+import { Switch, BrowserRouter } from "react-router-dom";
 import Login from "./pages/login/login";
 import SignIn from "./pages/create/signin";
 import { ToastProvider } from "react-toast-notifications";
@@ -15,7 +15,7 @@ function App({ user, setUser }) {
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <ToastProvider>
-        <HashRouter basename={process.env.PUBLIC_URL}>
+        <BrowserRouter>
           <Switch>
             <LoginRoute path="/" exact component={Login} />
             <PublicRoute path="/signin" exact component={SignIn} />
@@ -23,7 +23,7 @@ function App({ user, setUser }) {
             <PrivateRoute path="/pre-home" exact component={PreHome} />
             <PrivateRoute path="/account" exact component={Account} />
           </Switch>
-        </HashRouter>
+        </BrowserRouter>
       </ToastProvider>
     </UserContext.Provider>
   );
