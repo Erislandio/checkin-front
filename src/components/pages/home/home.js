@@ -112,7 +112,7 @@ function Home() {
           {users.length &&
             users.map(user => {
               return (
-                <Marker position={user.location.coordinates} key={user._id}>
+                <Marker position={user.location.coordinates.reverse()} key={user._id}>
                   <Popup>
                     {`${user.name} ${user.lastname} `}
                     está com os simtomas do covid-19
