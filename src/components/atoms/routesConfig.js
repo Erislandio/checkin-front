@@ -22,7 +22,7 @@ const LoginRoute = ({ component: Component, path, ...rest }) => {
       {...rest}
       render={props =>
         user && path === "/" ? (
-          <Redirect to="/pre-home" exact {...props} />
+          <Redirect to="/home" exact {...props} />
         ) : (
           <Component to="/" exact {...props} />
         )

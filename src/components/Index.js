@@ -15,7 +15,7 @@ function App({ user, setUser }) {
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <ToastProvider>
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <BrowserRouter basename="/">
           <Switch>
             <LoginRoute path="/" exact component={Login} />
             <PublicRoute path="/signin" exact component={SignIn} />
