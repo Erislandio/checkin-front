@@ -11,9 +11,8 @@ import {
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { confirmAlert } from "react-confirm-alert";
 import { UserContext } from "../../Index";
-import { api } from "../../services/api";
 
-function Account() {
+function Account({ history }) {
   const {
     user: {
       user,
@@ -47,9 +46,6 @@ function Account() {
 
   const handleSubmitForm = e => {
     e.preventDefault();
-
-    api.patch
-
   };
 
   const handleChange = e => {
@@ -65,7 +61,7 @@ function Account() {
 
   const handleExit = () => {
     localStorage.removeItem("user");
-    window.location.href = "/";
+    history.go("/");
   };
 
   return (

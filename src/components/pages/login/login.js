@@ -46,10 +46,9 @@ export default function LoginScreen({ history }) {
             });
           }
           localStorage.setItem("user", JSON.stringify(data));
-          window.location.href = '/pre-home'
+          history.go("/pre-home");
         })
         .catch(error => {
-
           addToast(
             "Ops! não foi possível acessar o app no momento,  tente novamente mais tarde",
             {

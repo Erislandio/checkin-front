@@ -91,6 +91,8 @@ function Home() {
     );
   }
 
+  console.log(user)
+
   return (
     <section className="app" id="app">
       <div>
@@ -106,7 +108,7 @@ function Home() {
           />
           <Marker position={userLocation}>
             <Popup>
-              {`Olá ${user.name} ${user.lastname}, você esta aqui `}
+              {`Olá ${user.user.name} ${user.user.lastname}, você esta aqui `}
             </Popup>
           </Marker>
           {users.length &&

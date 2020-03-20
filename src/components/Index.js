@@ -13,19 +13,19 @@ export const UserContext = createContext();
 
 function App({ user, setUser }) {
   return (
-    <ToastProvider>
-      <HashRouter basename={process.env.PUBLIC_URL}>
-        <Switch>
-          <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser }}>
+      <ToastProvider>
+        <HashRouter basename={process.env.PUBLIC_URL}>
+          <Switch>
             <LoginRoute path="/" exact component={Login} />
             <PublicRoute path="/signin" exact component={SignIn} />
             <PrivateRoute path="/home" exact component={Home} />
             <PrivateRoute path="/pre-home" exact component={PreHome} />
             <PrivateRoute path="/account" exact component={Account} />
-          </UserContext.Provider>
-        </Switch>
-      </HashRouter>
-    </ToastProvider>
+          </Switch>
+        </HashRouter>
+      </ToastProvider>
+    </UserContext.Provider>
   );
 }
 

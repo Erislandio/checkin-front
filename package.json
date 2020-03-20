@@ -19,7 +19,7 @@
     "react-switch": "^5.0.1",
     "react-toast-notifications": "^2.4.0"
   },
-  "homepage": "https://erislandio.github.io/checkin-front/",
+  "homepage": "/",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",

@@ -73,6 +73,10 @@ function PreHome({ history }) {
   };
 
   useEffect(() => {
+    if (user.user.symptom) {
+      return history.push("/home");
+    }
+
     confirmAlert(options);
   }, []);
 
