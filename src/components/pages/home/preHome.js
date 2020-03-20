@@ -51,7 +51,7 @@ function PreHome({ history }) {
         return confirmAlert(options);
       }
 
-      history.push("/home");
+      window.location.href = "/home";
     }, 2000);
   }
 
