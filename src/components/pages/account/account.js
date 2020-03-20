@@ -11,6 +11,7 @@ import {
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { confirmAlert } from "react-confirm-alert";
 import { UserContext } from "../../Index";
+import { api } from "../../services/api";
 
 function Account() {
   const {
@@ -19,7 +20,6 @@ function Account() {
       user: { address: userAddress, symptom }
     }
   } = useContext(UserContext);
-  console.log(user);
 
   const [checked, setChecked] = useState(symptom);
   const [address, setAddress] = useState(userAddress);
@@ -45,10 +45,11 @@ function Account() {
     setChecked(!checked);
   };
 
-  console.log(user);
-
   const handleSubmitForm = e => {
     e.preventDefault();
+
+    api.patch
+
   };
 
   const handleChange = e => {
@@ -100,7 +101,7 @@ function Account() {
           <label>
             <h3>Endereço cadastrado</h3>
           </label>
-          <FormDefaultWrapper>
+          <FormDefaultWrapper onSubmit={handleSubmitForm}>
             <InputDefault
               type="cel"
               required

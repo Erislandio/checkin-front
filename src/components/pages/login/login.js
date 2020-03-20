@@ -49,7 +49,6 @@ export default function LoginScreen({ history }) {
           window.location.href = '/pre-home'
         })
         .catch(error => {
-          console.log(error);
 
           addToast(
             "Ops! não foi possível acessar o app no momento,  tente novamente mais tarde",
@@ -64,7 +63,6 @@ export default function LoginScreen({ history }) {
 
       setLoading(false);
     } catch (error) {
-      console.log(error);
       addToast(
         "Ops! não foi possível acessar o app no momento,  tente novamente mais tarde",
         {
